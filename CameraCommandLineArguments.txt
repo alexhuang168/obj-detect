@@ -1,0 +1,67 @@
+# Camera commands
+
+# sensor_id selects the camera: 0 or 1 on Jetson Nano B01
+$ gst-launch-1.0 nvarguscamerasrc sensor_id=0 ! nvoverlaysink
+# For USB camera (logitech C270)
+$ gst-launch-1.0 -ev v4l2src device=/dev/video2 ! xvimagesink
+
+
+# Clear the gstreamer pipeline:
+- Run this if the camera pipeline was not closed properly
+
+$ sudo systemctl restart nvargus-daemon
+
+
+
+------------------------------------------------------------------------------------
+# Do not worry about these
+
+# OpenCV Version
+$ sudo apt install python3-opencv
+# Verify opencv version (we want 4.1.1)
+$ python3 -c "import cv2; print(cv2.__version__)"
+
+
+# Save flask env & run
+$ export FLASK_APP=filename.py
+$ export FLASK_ENV=development
+$ flask run
+
+
+CameraModes
+
+GST_ARGUS: Available Sensor modes :
+GST_ARGUS: 3264 x 2464 FR = 21.000000 fps Duration = 47619048 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
+
+GST_ARGUS: 3264 x 1848 FR = 28.000001 fps Duration = 35714284 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
+
+GST_ARGUS: 1920 x 1080 FR = 29.999999 fps Duration = 33333334 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
+
+GST_ARGUS: 1640 x 1232 FR = 29.999999 fps Duration = 33333334 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
+
+GST_ARGUS: 1280 x 720 FR = 59.999999 fps Duration = 16666667 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
+
+GST_ARGUS: 1280 x 720 FR = 120.000005 fps Duration = 8333333 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
+
+# view python processes
+ps -fA | grep python
+# kill a process
+kill -9 processID
+
+
+# Jetson Expansion Header Tool (pinout config)
+$ sudo /opt/nvidia/jetson-io/jetson-io.py
+
+
+# Startup script file locations
+# Systemd service
+/etc/systemd/system/dsr-startup.service
+
+# Script that runs the python program
+/usr/local/sbin/start_detection.sh
+
+
+
+
+
+
